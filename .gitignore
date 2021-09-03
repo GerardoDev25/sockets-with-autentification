@@ -1,0 +1,8 @@
+node_modules/
+
+.env
+
+google_credential.json
+
+uploads/products/**.*
+uploads/users/**.*

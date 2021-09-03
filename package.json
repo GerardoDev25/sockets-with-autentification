@@ -1,0 +1,35 @@
+{
+   "name": "07-restserver",
+   "version": "2.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app",
+      "dev": "nodemon app"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/GerardoDev25/restServer-node-basic.git"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/GerardoDev25/restServer-node-basic/issues"
+   },
+   "homepage": "https://github.com/GerardoDev25/restServer-node-basic#readme",
+   "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "colors": "^1.4.0",
+      "cors": "^2.8.5",
+      "dotenv": "^10.0.0",
+      "express": "^4.17.1",
+      "express-fileupload": "^1.2.1",
+      "express-validator": "^6.12.1",
+      "google-auth-library": "^7.6.2",
+      "jsonwebtoken": "^8.5.1",
+      "mongoose": "^5.13.7",
+      "uuid": "^8.3.2"
+   }
+}
