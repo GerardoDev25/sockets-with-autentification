@@ -4,10 +4,18 @@ const fileUpload = require("express-fileupload");
 
 const { dbConnection } = require("../database/config.js");
 
+const {
+   socketController,
+} = require("../sockets/sockets.controller.js");
+
 class Server {
    constructor() {
       this.port = process.env.PORT;
       this.app = express();
+
+      // * sockets
+      this.server = require("http").createServer(this.app);
+      this.io = require("socket.io")(this.server);
 
       // * paths
       this.paths = {
@@ -27,6 +35,9 @@ class Server {
 
       // * routes
       this.routes();
+
+      // * sockets
+      this.sockets();
    }
 
    async connectDB() {
@@ -87,9 +98,14 @@ class Server {
       );
    }
 
+   // ? sockets configuration
+   sockets() {
+      this.io.on("connection", socketController);
+   }
+
    // ? funtion that listen the app in the port
    listen() {
-      this.app.listen(this.port, () => {
+      this.server.listen(this.port, () => {
          console.log("server run in port ", this.port);
       });
    }
