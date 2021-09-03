@@ -81,7 +81,7 @@ const gogleSignIn = async (req = request, res = response) => {
          await user.save();
       }
 
-      // * if user db isn't active 
+      // * if user db isn't active
       if (!user.state) {
          return res
             .status(401)
@@ -100,4 +100,14 @@ const gogleSignIn = async (req = request, res = response) => {
    }
 };
 
-module.exports = { login, gogleSignIn };
+// ? function that check if the token is valid
+const renovateToken = async (req = request, res = response) => {
+   const { userAuth } = req;
+
+   // * generate and send token
+   const token = await generateJWT(userAuth.uid);
+
+   res.json({ userAuth, token });
+};
+
+module.exports = { login, gogleSignIn, renovateToken };

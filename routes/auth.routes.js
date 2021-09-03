@@ -4,17 +4,22 @@ const { check } = require("express-validator");
 // * middleware
 const {
    ValidataInputs,
-} = require("../middlewares/validate-inputs");
+   validateJWT,
+} = require("../middlewares");
 
 // * controllers
 const {
    login,
    gogleSignIn,
+   renovateToken
 } = require("../controllers/auth.controller");
 
 // ! ----------------------------------------------------
 
 const router = Router();
+
+// ? GET
+router.get("/", [validateJWT], renovateToken);
 
 // ? POST
 router.post(
