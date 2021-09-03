@@ -100,14 +100,14 @@ const gogleSignIn = async (req = request, res = response) => {
    }
 };
 
-// ? function that check if the token is valid
+// ? function that check and return new JWT
 const renovateToken = async (req = request, res = response) => {
    const { userAuth } = req;
 
    // * generate and send token
    const token = await generateJWT(userAuth.uid);
 
-   res.json({ userAuth, token });
+   res.status(200).json({ userAuth, token });
 };
 
 module.exports = { login, gogleSignIn, renovateToken };

@@ -11,7 +11,7 @@ const {
 const {
    login,
    gogleSignIn,
-   renovateToken
+   renovateToken,
 } = require("../controllers/auth.controller");
 
 // ! ----------------------------------------------------
@@ -19,7 +19,7 @@ const {
 const router = Router();
 
 // ? GET
-router.get("/", [validateJWT], renovateToken);
+router.get("/", validateJWT, renovateToken);
 
 // ? POST
 router.post(
