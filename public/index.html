@@ -28,7 +28,7 @@
       <title>Google Sign In</title>
    </head>
    <body class="container">
-      <div class="row">
+      <div class="row mt-5">
          <div class="col-sm-6">
             <h1>Google Sign in</h1>
             <hr />
@@ -42,38 +42,29 @@
          </div>
 
          <div class="col-sm-6">
-            
+            <h1>Login Manual</h1>
+            <br />
+            <form class="d-grid">
+               <input
+                  type="text"
+                  name="email"
+                  class="form-control"
+                  placeholder="email"
+               />
+               <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="password"
+               />
+
+               <button type="submit" class="btn btn-primary">
+                  Ingresar
+               </button>
+            </form>
          </div>
       </div>
 
-      <script>
-         var url = "http://localhost:8080/api/auth/google";
-
-         function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            // console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            // console.log("Name: " + profile.getName());
-            // console.log("Image URL: " + profile.getImageUrl());
-            // console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-
-            var id_token = googleUser.getAuthResponse().id_token;
-
-            fetch(url, {
-               method: "post",
-               headers: { "Content-Type": "application/json" },
-               body: JSON.stringify({ id_token }),
-            })
-               .then((resp) => resp.json())
-               .then(console.log)
-               .catch(console.error);
-         }
-
-         function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-               console.log("User signed out.");
-            });
-         }
-      </script>
+      <script src="./js/auth.js"></script>
    </body>
 </html>
