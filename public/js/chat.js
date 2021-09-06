@@ -4,6 +4,17 @@ const url = "http://localhost:8080/api/auth/google";
 let user = null;
 let socket = null;
 
+
+// ? concciton of the socket
+const socketConnection = async () => {
+   const socket = io({
+      extraHeaders: {
+         "x-token": localStorage.getItem("token"),
+      },
+   });
+};
+
+
 // ? function that valid the JWT
 const validateJWT = async () => {
    const token = localStorage.getItem("token") || "";
@@ -25,14 +36,6 @@ const validateJWT = async () => {
    document.title = user.name;
 
    await socketConnection();
-};
-
-const socketConnection = async () => {
-   const socket = io({
-      extraHeaders: {
-         "x-token": localStorage.getItem("token"),
-      },
-   });
 };
 
 const main = async () => {

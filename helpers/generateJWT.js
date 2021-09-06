@@ -22,7 +22,7 @@ const generateJWT = (uid = "") =>
    });
 
 const checkJWT = async (token = "") => {
-   console.log(token);
+   // console.log("createJWT: ", token);
    try {
       if (token.length <= 10) return null;
       const { uid } = jwt.verify(
@@ -30,15 +30,10 @@ const checkJWT = async (token = "") => {
          process.env.SECRETORPRIVATEKEY
       );
 
-      console.log(uid);
-      // console.log(uid);
+      const user = await UserModel.findById(uid);
 
-      // const user = UserModel.findById(uid);
-
-      // if (user)
-      //    if (user.state) return user;
-      //    else return null;
-      // else return null;
+      if (user && user.state) return user;
+      return null;
 
       //
    } catch (error) {

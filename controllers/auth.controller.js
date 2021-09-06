@@ -105,7 +105,8 @@ const renovateToken = async (req = request, res = response) => {
    const { userAuth } = req;
 
    // * generate and send token
-   const token = await generateJWT(userAuth.uid);
+   // console.log("renovateToken: ", userAuth);
+   const token = await generateJWT(userAuth._id);
 
    res.status(200).json({ userAuth, token });
 };
