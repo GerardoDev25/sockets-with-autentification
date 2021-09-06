@@ -10,6 +10,22 @@ const $ulUsers = document.querySelector("#ulUsers");
 const $ulMessages = document.querySelector("#ulMessages");
 const $btnExit = document.querySelector("#btnExit");
 
+const drawUsers = (users = []) => {
+   let htmlUsers = "";
+   users.forEach(({ name, uid }) => {
+      htmlUsers += `
+      <l1>
+         <p>
+            <h5 class="text-success">${name}</h5>
+            <span class="fs-6 text-muted">${uid}</span=>
+         </p>
+      </l1>
+      `;
+   });
+
+   $ulUsers.innerHTML = htmlUsers;
+};
+
 // ? concciton of the socket
 const socketConnection = async () => {
    socket = io({
@@ -28,9 +44,7 @@ const socketConnection = async () => {
 
    socket.on("get-messages", () => {});
 
-   socket.on("users-actives", (payload) => {
-      console.log(payload);
-   });
+   socket.on("users-actives", drawUsers);
 
    socket.on("message-private", () => {});
 };
