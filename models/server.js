@@ -100,7 +100,9 @@ class Server {
 
    // ? sockets configuration
    sockets() {
-      this.io.on("connection", socketController);
+      this.io.on("connection", (socket) => {
+         socketController(socket, this.io);
+      });
    }
 
    // ? funtion that listen the app in the port

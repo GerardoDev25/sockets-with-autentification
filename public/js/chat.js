@@ -28,7 +28,9 @@ const socketConnection = async () => {
 
    socket.on("get-messages", () => {});
 
-   socket.on("users-actives", () => {});
+   socket.on("users-actives", (payload) => {
+      console.log(payload);
+   });
 
    socket.on("message-private", () => {});
 };
