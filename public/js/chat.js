@@ -4,16 +4,34 @@ const url = "http://localhost:8080/api/auth/google";
 let user = null;
 let socket = null;
 
+const $txtUid = document.querySelector("#txtUid");
+const $txtMsg = document.querySelector("#txtMsg");
+const $ulUsers = document.querySelector("#ulUsers");
+const $ulMessages = document.querySelector("#ulMessages");
+const $btnExit = document.querySelector("#btnExit");
 
 // ? concciton of the socket
 const socketConnection = async () => {
-   const socket = io({
+   socket = io({
       extraHeaders: {
          "x-token": localStorage.getItem("token"),
       },
    });
-};
 
+   socket.on("connect", () => {
+      console.log("socket online");
+   });
+
+   socket.on("disconnect", () => {
+      console.log("socket offline");
+   });
+
+   socket.on("get-messages", () => {});
+
+   socket.on("users-actives", () => {});
+
+   socket.on("message-private", () => {});
+};
 
 // ? function that valid the JWT
 const validateJWT = async () => {
