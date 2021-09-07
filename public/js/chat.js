@@ -17,7 +17,7 @@ const drawUsers = (users = []) => {
          <l1>
             <p>
                <h5 class="text-success">${name}</h5>
-               <span class="fs-6 text-muted">${uid}</span=>
+               <span class="fs-6 text-muted">${uid}</span>
             </p>
          </l1>
       `;
@@ -25,14 +25,15 @@ const drawUsers = (users = []) => {
 
    $ulUsers.innerHTML = htmlUsers;
 };
+
 const drawMessages = (messages = []) => {
    let htmlMessages = "";
-   messages.forEach(({ name, uid }) => {
+   messages.forEach(({ name, message }) => {
       htmlMessages += `
          <l1>
             <p>
-               <h5 class="text-success">${name}</h5>
-               <span class="fs-6 text-muted">${uid}</span=>
+               <span class="text-primary">${name}</span>
+               <span >${message}</span>
             </p>
          </l1>
       `;
@@ -58,7 +59,7 @@ const socketConnection = async () => {
    });
 
    socket.on("get-messages", (payload) => {
-      console.log(payload);
+      drawMessages(payload);
    });
 
    socket.on("users-actives", drawUsers);
