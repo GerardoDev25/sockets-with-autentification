@@ -39,7 +39,7 @@ const drawMessages = (messages = []) => {
       `;
    });
 
-   $ulUsers.innerHTML = htmlMessages;
+   $ulMessages.innerHTML = htmlMessages;
 };
 
 // ? concciton of the socket
@@ -58,13 +58,12 @@ const socketConnection = async () => {
       console.log("socket offline");
    });
 
-   socket.on("get-messages", (payload) => {
-      drawMessages(payload);
-   });
-
+   socket.on("get-messages", drawMessages);
    socket.on("users-actives", drawUsers);
 
-   socket.on("message-private", () => {});
+   socket.on("message-private", (payload) => {
+      console.log("Privado:", payload);
+   });
 };
 
 // ? function that valid the JWT
@@ -90,11 +89,6 @@ const validateJWT = async () => {
    await socketConnection();
 };
 
-const main = async () => {
-   await validateJWT();
-};
-
-main();
 
 $txtMsg.addEventListener("keyup", ({ keyCode }) => {
    const message = $txtMsg.value;
@@ -106,3 +100,10 @@ $txtMsg.addEventListener("keyup", ({ keyCode }) => {
    socket.emit("send-message", { message, uid });
    $txtMsg.value = "";
 });
+
+
+const main = async () => {
+   await validateJWT();
+};
+
+main();
