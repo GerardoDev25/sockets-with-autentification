@@ -14,16 +14,31 @@ const drawUsers = (users = []) => {
    let htmlUsers = "";
    users.forEach(({ name, uid }) => {
       htmlUsers += `
-      <l1>
-         <p>
-            <h5 class="text-success">${name}</h5>
-            <span class="fs-6 text-muted">${uid}</span=>
-         </p>
-      </l1>
+         <l1>
+            <p>
+               <h5 class="text-success">${name}</h5>
+               <span class="fs-6 text-muted">${uid}</span=>
+            </p>
+         </l1>
       `;
    });
 
    $ulUsers.innerHTML = htmlUsers;
+};
+const drawMessages = (messages = []) => {
+   let htmlMessages = "";
+   messages.forEach(({ name, uid }) => {
+      htmlMessages += `
+         <l1>
+            <p>
+               <h5 class="text-success">${name}</h5>
+               <span class="fs-6 text-muted">${uid}</span=>
+            </p>
+         </l1>
+      `;
+   });
+
+   $ulUsers.innerHTML = htmlMessages;
 };
 
 // ? concciton of the socket
@@ -42,7 +57,9 @@ const socketConnection = async () => {
       console.log("socket offline");
    });
 
-   socket.on("get-messages", () => {});
+   socket.on("get-messages", (payload) => {
+      console.log(payload);
+   });
 
    socket.on("users-actives", drawUsers);
 
@@ -77,3 +94,14 @@ const main = async () => {
 };
 
 main();
+
+$txtMsg.addEventListener("keyup", ({ keyCode }) => {
+   const message = $txtMsg.value;
+   const uid = $txtUid.value;
+
+   if (keyCode !== 13) return;
+   if (!message) return;
+
+   socket.emit("send-message", { message, uid });
+   $txtMsg.value = "";
+});

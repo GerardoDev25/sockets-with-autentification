@@ -1,8 +1,8 @@
 class Message {
-    constructor( uid, nombre, mensaje ) {
+    constructor( uid, name, message ) {
         this.uid     = uid;
-        this.nombre  = nombre;
-        this.mensaje = mensaje;
+        this.name  = name;
+        this.message = message;
     }
 }
 
